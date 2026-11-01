@@ -181,9 +181,8 @@ def reset(goal_id: int):
         reset_goal_sessions(current_user_id(), goal_id)
         flash("Статистика сброшена.", "success")
     return redirect(url_for("goal_detail", goal_id=goal_id))
-
+init_database()
 
 if __name__ == "__main__":
-    init_database()
     app.run(debug=True)
 
