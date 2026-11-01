@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} — Study Tracker{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('goal_detail', goal_id=goal['id']) }}">← {{ goal['name'] }}</a><h1>{{ heading }}</h1>
+<form method="post" class="card form-card">
+  <label>Дата<input type="date" name="date" value="{{ form.get('date', today) }}" required></label>
+  <label>Длительность, минут<input type="number" name="duration_minutes" min="1" value="{{ form.get('duration_minutes', '') }}" required></label>
+  <div class="two-cols"><label>Всего заданий<input type="number" name="total_tasks" min="0" value="{{ form.get('total_tasks', '') }}" required></label><label>Устных заданий<input type="number" name="oral_tasks" min="0" value="{{ form.get('oral_tasks', '') }}" required></label></div>
+  <label>Практических заданий<input type="number" name="practical_tasks" min="0" value="{{ form.get('practical_tasks', '') }}" required></label>
+  <label>Комментарий<textarea name="comment" rows="4" placeholder="Необязательно">{{ form.get('comment', '') }}</textarea></label>
+  <button class="button primary" type="submit">Сохранить</button>
+</form>
+{% endblock %}

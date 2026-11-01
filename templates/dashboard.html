@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Мои цели — Study Tracker{% endblock %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">Личный трекер</p><h1>Мои цели</h1><p class="muted">Планируйте занятия и следите за прогрессом.</p></div></div>
+<section class="card add-card">
+  <h2>Новая цель</h2>
+  <form method="post" action="{{ url_for('create_goal') }}" class="inline-form">
+    <input name="name" placeholder="Например, Python" required maxlength="120">
+    <button class="button primary">Добавить</button>
+  </form>
+</section>
+<section class="goal-grid">
+  {% for goal in goals %}
+  <a class="goal-card" href="{{ url_for('goal_detail', goal_id=goal['id']) }}"><span class="goal-icon">✓</span><span><strong>{{ goal['name'] }}</strong><small>Открыть статистику</small></span><span class="arrow">→</span></a>
+  {% else %}
+  <div class="card empty"><h2>Целей пока нет</h2><p class="muted">Добавьте первую цель выше.</p></div>
+  {% endfor %}
+</section>
+{% endblock %}

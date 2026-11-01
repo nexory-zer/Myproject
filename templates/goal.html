@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ goal['name'] }} — Study Tracker{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('index') }}">← Все цели</a>
+<div class="page-head"><div><p class="eyebrow">Цель</p><h1>{{ goal['name'] }}</h1></div><a class="button primary" href="{{ url_for('new_session', goal_id=goal['id']) }}">+ Добавить занятие</a></div>
+<section class="stats-grid">
+  <div class="stat"><span>Всего времени</span><strong>{{ stats['total_minutes_label'] }}</strong></div><div class="stat"><span>Занятий</span><strong>{{ stats['session_count'] }}</strong></div><div class="stat"><span>Всего заданий</span><strong>{{ stats['total_tasks'] }}</strong></div><div class="stat"><span>Устных</span><strong>{{ stats['oral_tasks'] }}</strong></div><div class="stat"><span>Практических</span><strong>{{ stats['practical_tasks'] }}</strong></div><div class="stat"><span>Лучший день</span><strong>{{ stats['max_day_minutes_label'] }}</strong></div>
+</section>
+<div class="actions"><a class="button secondary" href="{{ url_for('history', goal_id=goal['id']) }}">История по дате</a><form method="post" action="{{ url_for('reset', goal_id=goal['id']) }}" onsubmit="return confirm('Сбросить всю статистику этой цели?')"><button class="button danger">Сбросить статистику</button></form></div>
+{% endblock %}

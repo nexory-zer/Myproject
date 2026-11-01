@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}История — Study Tracker{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('goal_detail', goal_id=goal['id']) }}">← {{ goal['name'] }}</a><div class="page-head"><div><p class="eyebrow">История</p><h1>Занятия по дате</h1></div></div>
+<form method="get" class="date-form"><input type="date" name="date" value="{{ selected_date }}"><button class="button secondary">Показать</button></form>
+{% if sessions %}<div class="session-list">{% for item in sessions %}<article class="card session"><div class="session-head"><h2>Занятие {{ loop.index }}</h2><a href="{{ url_for('edit_session', session_id=item['id'], goal_id=goal['id']) }}">Изменить</a></div><p class="big-number">{{ format_minutes(item['duration_minutes']) }}</p><p>Заданий: {{ item['total_tasks'] }} · устных: {{ item['oral_tasks'] }} · практических: {{ item['practical_tasks'] }}</p>{% if item['comment'] %}<p class="comment">{{ item['comment'] }}</p>{% endif %}</article>{% endfor %}</div><p class="day-total">Итого за день: <strong>{{ format_minutes(sessions | sum(attribute='duration_minutes')) }}</strong></p>{% else %}<div class="card empty"><h2>Занятий нет</h2><p class="muted">За выбранную дату записи не найдены.</p></div>{% endif %}
+{% endblock %}
